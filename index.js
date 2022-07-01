@@ -26,6 +26,18 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/completedTask', async (req, res) => {
+            const query = { done: true }
+            const result = await taskCollection.find(query).toArray()
+            res.send(result)
+        }) 
+
+        app.get('/todo', async (req, res) => {
+            const query = { done: false }
+            const result = await taskCollection.find(query).toArray()
+            res.send(result)
+        })        
+
         app.post('/task', async (req, res) => {
             const task = req.body;
             // const query = { treatment: booking.treatment, date: booking.date, patient: booking.patient }
